@@ -1,0 +1,7 @@
+.nav {
+    grid-area: nav;
+    background-color: lightslategrey;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
