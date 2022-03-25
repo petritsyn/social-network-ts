@@ -5,3 +5,12 @@
     flex-direction: column;
     padding: 10px;
 }
+
+.nav a {
+    color: white;
+    text-decoration: none;
+}
+
+a.active {
+    color: gold;
+}

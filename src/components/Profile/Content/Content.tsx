@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './Content.module.css';
-import MyPosts from "./MyPosts/MyPosts";
 
 const Content = () => {
     return (
@@ -13,9 +12,6 @@ const Content = () => {
             <div>
                 ava + description
             </div>
-
-            <MyPosts/>
-
         </div>
     )
 }
