@@ -14,12 +14,14 @@ function App() {
             <div className="App-wrapper">
                 <Header/>
                 <Navbar/>
-                <Switch>
-                    <Route path="/profile" component={Profile}/>
-                    <Route path="/dialogs" component={Dialogs}/>
-                    <Route path="/friends" component={Friends}/>
-                    <Route path="/music" component={Music}/>
-                </Switch>
+                <div className="contentWrapper">
+                    <Switch>
+                        <Route path="/profile" component={Profile}/>
+                        <Route path="/dialogs" component={Dialogs}/>
+                        <Route path="/friends" component={Friends}/>
+                        <Route path="/music" component={Music}/>
+                    </Switch>
+                </div>
             </div>
         </Router>
     );
