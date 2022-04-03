@@ -9,7 +9,7 @@ const Content = () => {
                     src='https://wikitravel.org/upload/shared/thumb/a/a9/Bahamas_banner.jpg/1200px-Bahamas_banner.jpg'/>
             </div>
 
-            <div>
+            <div className={s.description}>
                 ava + description
             </div>
         </div>
