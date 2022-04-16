@@ -34,28 +34,29 @@ const Dialogs = () => {
     let dialogsData: Array<DialogsDataType> = [
         {id: 1, name: 'Andrew'},
         {id: 2, name: 'Anna'},
+        {id: 2, name: 'Alina'},
+        {id: 2, name: 'Alexander'},
     ];
 
     let messageData: Array<MessageDataType> = [
         {id: 1, message: 'Hello'},
-        {id: 2, message: 'How are you?'}
+        {id: 2, message: 'How are you?'},
+        {id: 2, message: 'Hey'}
     ]
+
+    const dialogsElements = dialogsData.map(d => <DialogsItem id={d.id} name={d.name}/>);
+    const messageElements = messageData.map(m => <Message message={m.message}/>)
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItem}>
-                <DialogsItem id={dialogsData[0].id} name={dialogsData[0].name}/>
-                <DialogsItem id={dialogsData[1].id} name={dialogsData[1].name}/>
-
+                {dialogsElements}
             </div>
 
             <div className={s.message}>
-                <Message message={messageData[0].message}/>
-                <Message message={messageData[1].message}/>
+                {messageElements}
             </div>
         </div>
-
-
     );
 };
 
