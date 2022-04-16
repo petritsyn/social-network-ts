@@ -11,6 +11,16 @@ type MessagePropsType = {
     message: string
 }
 
+type DialogsDataType = {
+    id: number
+    name: string
+}
+
+type MessageDataType = {
+    id: number
+    message: string
+}
+
 const DialogsItem: React.FC<DialogsItemPropsType> = (props) => {
     return <div><NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink></div>
 }
@@ -20,20 +30,28 @@ const Message: React.FC<MessagePropsType> = (props) => {
 }
 
 const Dialogs = () => {
+
+    let dialogsData: Array<DialogsDataType> = [
+        {id: 1, name: 'Andrew'},
+        {id: 2, name: 'Anna'},
+    ];
+
+    let messageData: Array<MessageDataType> = [
+        {id: 1, message: 'Hello'},
+        {id: 2, message: 'How are you?'}
+    ]
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItem}>
-                <DialogsItem id={1} name={'Andrey'}/>
-                <DialogsItem id={2} name={'Anna'}/>
-                <DialogsItem id={3} name={'Alina'}/>
-                <DialogsItem id={4} name={'Sergey'}/>
+                <DialogsItem id={dialogsData[0].id} name={dialogsData[0].name}/>
+                <DialogsItem id={dialogsData[1].id} name={dialogsData[1].name}/>
 
             </div>
 
             <div className={s.message}>
-                <Message message={'Hello'}/>
-                <Message message={'How are you?'}/>
-                <Message message={'Hey'}/>
+                <Message message={messageData[0].message}/>
+                <Message message={messageData[1].message}/>
             </div>
         </div>
 
