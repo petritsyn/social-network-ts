@@ -1,10 +1,7 @@
 import React from "react";
+import {MessageType} from "../../../state/state";
 
-type MessagePropsType = {
-    message: string
-}
-
-const Message: React.FC<MessagePropsType> = (props) => {
+const Message: React.FC<MessageType> = (props) => {
     return <div>{props.message}</div>
 }
 
