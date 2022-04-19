@@ -7,8 +7,15 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Profile from "./components/Profile/Profile";
 import Friends from "./components/Friends/Friends";
 import Music from "./components/Music/Music";
+import {DialogsDataType, MessageDataType, PostDataType} from "./index";
 
-function App() {
+type AppPropsType = {
+    posts: Array<PostDataType>
+    dialogs: Array<DialogsDataType>
+    messages: Array<MessageDataType>
+}
+
+function App(props: AppPropsType) {
     return (
         <Router>
             <div className="App-wrapper">
@@ -16,8 +23,10 @@ function App() {
                 <Navbar/>
                 <div className="contentWrapper">
                     <Switch>
-                        <Route path="/profile" component={Profile}/>
-                        <Route path="/dialogs" component={Dialogs}/>
+                        <Route path="/profile"><Profile posts={props.posts} /></Route>
+                        <Route path="/dialogs"><Dialogs dialogs={props.dialogs} messages={props.messages} /></Route>
+                        {/*<Route path="/profile" component={Profile}/>*/}
+                        {/*<Route path="/dialogs" component={Dialogs}/>*/}
                         <Route path="/friends" component={Friends}/>
                         <Route path="/music" component={Music}/>
                     </Switch>
