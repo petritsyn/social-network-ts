@@ -1,3 +1,5 @@
+import {rerender} from "../index";
+
 export type PostType = {
     id?: number
     message: string
@@ -48,6 +50,7 @@ let state: StateType = {
 export const addPost = (postText: string) => {
     let newPost = {id: 3, message: postText, likesCount: 10}
     state.profilePage.posts.push(newPost);
+    rerender()
 }
 
 export default state;
