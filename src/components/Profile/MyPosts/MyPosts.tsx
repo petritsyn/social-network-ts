@@ -6,6 +6,8 @@ import {addPost, PostType} from "../../../state/state";
 type MyPostsPropsType = {
     posts: Array<PostType>
     addPost: (postTest: string) => void
+    newPostText: string
+    updateNewPostText: (newText: string) => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -23,11 +25,12 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     const onPostChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let newPostText = e.currentTarget.value;
+        props.updateNewPostText(newPostText)
     }
 
     return (
         <div className={s.myPosts} >
-            <div><textarea ref={postMessageRef} onChange={onPostChangeHandler}/></div>
+            <div><textarea ref={postMessageRef} onChange={onPostChangeHandler} value={props.newPostText}/></div>
             <div><button onClick={addPostHandler}>Add post</button></div>
             {postElements}
         </div>
