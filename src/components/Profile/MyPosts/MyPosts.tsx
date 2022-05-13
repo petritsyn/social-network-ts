@@ -1,13 +1,12 @@
 import React, { ChangeEvent } from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {PostType} from "../../../state/state";
+import {ActionsTypes, PostType} from "../../../state/state";
 
 type MyPostsPropsType = {
     posts: Array<PostType>
-    addPost: (postTest: string) => void
     newPostText: string
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -18,14 +17,14 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     const addPostHandler = () => {
         if (postMessageRef.current) {
-            props.addPost(postMessageRef.current.value);
+            props.dispatch({type: "ADD-POST", postText: postMessageRef.current.value})
             postMessageRef.current.value = '';
         }
     }
 
     const onPostChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let newPostText = e.currentTarget.value;
-        props.updateNewPostText(newPostText)
+        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: newPostText})
     }
 
     return (

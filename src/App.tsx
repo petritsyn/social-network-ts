@@ -21,9 +21,8 @@ function App() {
                 <div className="contentWrapper">
                     <Switch>
                         <Route path="/profile" render={()=> <Profile posts={state.profilePage.posts}
-                                                                     addPost={store.addPost}
-                                                                     newPostText={state.profilePage.newPostText}
-                                                                     updateNewPostText={store.updateNewPostText}/>} />
+                                                                     dispatch={store.dispatch.bind(store)}
+                                                                     newPostText={state.profilePage.newPostText} />} />
                         <Route path="/dialogs" render={() => <Dialogs dialogs={state.dialogsPage.dialogs} messages={state.dialogsPage.messages} />}/>
                         <Route path="/friends" component={Friends}/>
                         <Route path="/music" component={Music}/>
