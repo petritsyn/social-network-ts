@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {ActionsTypes, PostType} from "../../../state/state";
+import {ActionsTypes, addPostAC, PostType, updateNewPostTextAC} from "../../../state/state";
 
 type MyPostsPropsType = {
     posts: Array<PostType>
@@ -17,14 +17,14 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     const addPostHandler = () => {
         if (postMessageRef.current) {
-            props.dispatch({type: "ADD-POST", postText: postMessageRef.current.value})
+            props.dispatch(addPostAC(postMessageRef.current.value))
             postMessageRef.current.value = '';
         }
     }
 
     const onPostChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let newPostText = e.currentTarget.value;
-        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: newPostText})
+        props.dispatch(updateNewPostTextAC(newPostText))
     }
 
     return (
