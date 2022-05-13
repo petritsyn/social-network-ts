@@ -2,7 +2,7 @@ import React from 'react';
 import Content from "./Content/Content";
 import MyPosts from "./MyPosts/MyPosts";
 import s from './Profile.module.css';
-import {PostType, updateNewPostText} from "../../state/state";
+import {PostType} from "../../state/state";
 
 type ProfilePropsType = {
     posts: Array<PostType>
@@ -18,7 +18,7 @@ const Profile = (props: ProfilePropsType) => {
             <MyPosts posts={props.posts}
                      addPost={props.addPost}
                      newPostText={props.newPostText}
-                     updateNewPostText={updateNewPostText}/>
+                     updateNewPostText={props.updateNewPostText}/>
         </div>
     );
 };

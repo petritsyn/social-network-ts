@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {addPost, PostType} from "../../../state/state";
+import {PostType} from "../../../state/state";
 
 type MyPostsPropsType = {
     posts: Array<PostType>
@@ -18,7 +18,7 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     const addPostHandler = () => {
         if (postMessageRef.current) {
-            addPost(postMessageRef.current.value);
+            props.addPost(postMessageRef.current.value);
             postMessageRef.current.value = '';
         }
     }
