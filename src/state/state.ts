@@ -20,6 +20,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+    newMessageText: string
 }
 export type StateType = {
     profilePage: ProfilePageType
@@ -30,7 +31,10 @@ export type StoreType = {
     getState: () => StateType
     dispatch: (action: ActionsTypes) => void
 }
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+export type ActionsTypes = ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof addMessageAC>
+    | ReturnType<typeof updateNewMessageTextAC>
 
 export const addPostAC = (postText: string) => ({
     type: "ADD-POST",
@@ -39,6 +43,16 @@ export const addPostAC = (postText: string) => ({
 
 export const updateNewPostTextAC = (newText: string) => ({
     type: "UPDATE-NEW-POST-TEXT",
+    newText: newText
+}) as const
+
+export const addMessageAC = (newMessageText: string) => ({
+    type: "ADD-MESSAGE",
+    newMessageText: newMessageText
+}) as const
+
+export const updateNewMessageTextAC = (newText: string) => ({
+    type: "UPDATE-NEW-MESSAGE-TEXT",
     newText: newText
 }) as const
 
@@ -55,14 +69,15 @@ let store: StoreType = {
             dialogs: [
                 {id: 1, name: 'Andrew'},
                 {id: 2, name: 'Anna'},
-                {id: 2, name: 'Alina'},
-                {id: 2, name: 'Alexander'},
+                {id: 3, name: 'Alina'},
+                {id: 4, name: 'Alexander'},
             ],
             messages: [
                 {id: 1, message: 'Hello'},
                 {id: 2, message: 'How are you?'},
-                {id: 2, message: 'Hey'}
-            ]
+                {id: 3, message: 'Hey'}
+            ],
+            newMessageText: ''
         }
     },
     getState() {
@@ -76,6 +91,14 @@ let store: StoreType = {
             rerender();
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             store._state.profilePage.newPostText = action.newText;
+            rerender();
+        } else if (action.type === 'ADD-MESSAGE') {
+            let newPost = {id: 4, message: action.newMessageText, likesCount: 10}
+            this._state.dialogsPage.messages.push(newPost);
+            this._state.dialogsPage.newMessageText = '';
+            rerender();
+        }  else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            store._state.dialogsPage.newMessageText = action.newText;
             rerender();
         }
     }

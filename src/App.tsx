@@ -23,7 +23,10 @@ function App() {
                         <Route path="/profile" render={()=> <Profile posts={state.profilePage.posts}
                                                                      dispatch={store.dispatch.bind(store)}
                                                                      newPostText={state.profilePage.newPostText} />} />
-                        <Route path="/dialogs" render={() => <Dialogs dialogs={state.dialogsPage.dialogs} messages={state.dialogsPage.messages} />}/>
+                        <Route path="/dialogs" render={() => <Dialogs dialogs={state.dialogsPage.dialogs}
+                                                                      messages={state.dialogsPage.messages}
+                                                                      newMessageText={state.dialogsPage.newMessageText}
+                                                                      dispatch={store.dispatch.bind(store)}/>}/>
                         <Route path="/friends" component={Friends}/>
                         <Route path="/music" component={Music}/>
                     </Switch>
