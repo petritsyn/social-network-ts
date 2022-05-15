@@ -1,4 +1,6 @@
 import {rerender} from "../index";
+import profileReducer, {addPostAC, updateNewPostTextAC} from "./profile-reducer";
+import dialogsReducer, {addMessageAC, updateNewMessageTextAC} from "./dialogs-reducer";
 
 export type PostType = {
     id?: number
@@ -36,26 +38,6 @@ export type ActionsTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof addMessageAC>
     | ReturnType<typeof updateNewMessageTextAC>
 
-export const addPostAC = (postText: string) => ({
-    type: "ADD-POST",
-    postText: postText
-}) as const
-
-export const updateNewPostTextAC = (newText: string) => ({
-    type: "UPDATE-NEW-POST-TEXT",
-    newText: newText
-}) as const
-
-export const addMessageAC = (newMessageText: string) => ({
-    type: "ADD-MESSAGE",
-    newMessageText: newMessageText
-}) as const
-
-export const updateNewMessageTextAC = (newText: string) => ({
-    type: "UPDATE-NEW-MESSAGE-TEXT",
-    newText: newText
-}) as const
-
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -84,23 +66,9 @@ let store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost = {id: 3, message: action.postText, likesCount: 10}
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            rerender();
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            store._state.profilePage.newPostText = action.newText;
-            rerender();
-        } else if (action.type === 'ADD-MESSAGE') {
-            let newPost = {id: 4, message: action.newMessageText, likesCount: 10}
-            this._state.dialogsPage.messages.push(newPost);
-            this._state.dialogsPage.newMessageText = '';
-            rerender();
-        }  else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            store._state.dialogsPage.newMessageText = action.newText;
-            rerender();
-        }
+        store.getState().profilePage = profileReducer(store.getState().profilePage, action)
+        store.getState().dialogsPage = dialogsReducer(store.getState().dialogsPage, action)
+        rerender()
     }
 }
 
