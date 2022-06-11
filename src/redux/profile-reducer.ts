@@ -10,7 +10,15 @@ export const updateNewPostTextAC = (newText: string) => ({
     newText: newText
 }) as const
 
-const profileReducer = (state: ProfilePageType, action: ActionsTypes) => {
+let initialState = {
+    posts: [
+        {id: 1, message: 'First post', likesCount: 5},
+        {id: 2, message: 'Second post', likesCount: 7}
+    ],
+    newPostText: ''
+}
+
+const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
 
     switch (action.type) {
         case "ADD-POST":

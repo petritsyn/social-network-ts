@@ -7,7 +7,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Profile from "./components/Profile/Profile";
 import Friends from "./components/Friends/Friends";
 import Music from "./components/Music/Music";
-import store from './state/state';
+import store from './redux/store';
 
 let state = store.getState();
 
