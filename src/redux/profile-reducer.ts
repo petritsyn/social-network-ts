@@ -1,4 +1,4 @@
-import {ActionsTypes, ProfilePageType} from "./state";
+import {ActionsTypes, ProfilePageType} from "./store";
 
 export const addPostAC = (postText: string) => ({
     type: "ADD-POST",

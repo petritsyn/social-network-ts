@@ -6,7 +6,7 @@ import store from './redux/store'
 
 export let rerender = () => {
     ReactDOM.render(
-        <App/>,
+        <App store={store}/>,
         document.getElementById('root')
     );
 }

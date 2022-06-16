@@ -1,4 +1,4 @@
-import {ActionsTypes, DialogsPageType} from "./state";
+import {ActionsTypes, DialogsPageType} from "./store";
 
 export const addMessageAC = (newMessageText: string) => ({
     type: "ADD-MESSAGE",
