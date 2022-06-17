@@ -68,7 +68,7 @@ let store: StoreType = {
     dispatch(action) {
         store.getState().profilePage = profileReducer(store.getState().profilePage, action)
         store.getState().dialogsPage = dialogsReducer(store.getState().dialogsPage, action)
-        rerender()
+        rerender(store.getState())
     }
 }
 
