@@ -13,7 +13,7 @@ type AppPropsType = {
     store: StoreType
 }
 
-function App(props: AppPropsType) {
+function App(props: any) {
     return (
         <Router>
             <div className="App-wrapper">
