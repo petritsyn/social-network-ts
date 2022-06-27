@@ -6,11 +6,11 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Friends from "./components/Friends/Friends";
 import Music from "./components/Music/Music";
-import {StoreType} from './redux/store';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import {AppStateType} from "./redux/redux-store";
 
 type AppPropsType = {
-    store: StoreType
+    store: AppStateType
 }
 
 function App(props: any) {

@@ -1,8 +1,8 @@
 import React from 'react';
 import Content from "./Content/Content";
 import s from './Profile.module.css';
-import {ActionsTypes, PostType} from "../../redux/store";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {ActionsTypes, PostType} from '../../redux/profile-reducer';
 
 type ProfilePropsType = {
     posts: Array<PostType>

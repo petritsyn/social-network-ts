@@ -1,3 +1,4 @@
+/*
 import {rerender} from "../index";
 import profileReducer, {addPostAC, updateNewPostTextAC} from "./profile-reducer";
 import dialogsReducer, {addMessageAC, updateNewMessageTextAC} from "./dialogs-reducer";
@@ -72,4 +73,5 @@ let store: StoreType = {
     }
 }
 
-export default store;
+export default store;*/
+export default 1
