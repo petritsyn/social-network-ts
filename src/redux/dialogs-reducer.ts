@@ -1,8 +1,7 @@
 export type ActionsTypes = ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewMessageTextAC>
 
-export const addMessageAC = (newMessageText: string) => ({
-    type: "ADD-MESSAGE",
-    newMessageText: newMessageText
+export const addMessageAC = () => ({
+    type: "ADD-MESSAGE"
 }) as const
 
 export const updateNewMessageTextAC = (newText: string) => ({
@@ -45,7 +44,7 @@ const dialogsReducer = (state: InitialStateType = initialState, action: ActionsT
 
     switch (action.type) {
         case "ADD-MESSAGE":
-            let newPost = {id: 4, message: action.newMessageText, likesCount: 10}
+            let newPost = {id: 4, message: state.newMessageText, likesCount: 10}
             state.messages.push(newPost);
             state.newMessageText = '';
             return state;

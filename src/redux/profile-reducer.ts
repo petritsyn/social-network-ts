@@ -9,7 +9,7 @@ export const updateNewPostTextAC = (newText: string) => ({
     newText: newText
 }) as const
 
-type InitialStateType = {
+export type InitialStateType = {
     posts: Array<{id: number, message: string, likesCount: number}>
     newPostText: string
 }

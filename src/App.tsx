@@ -6,14 +6,9 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Friends from "./components/Friends/Friends";
 import Music from "./components/Music/Music";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import {AppStateType} from "./redux/redux-store";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
-type AppPropsType = {
-    store: AppStateType
-}
-
-function App(props: any) {
+function App() {
     return (
         <Router>
             <div className="App-wrapper">
@@ -21,17 +16,8 @@ function App(props: any) {
                 <Navbar/>
                 <div className="contentWrapper">
                     <Switch>
-                        <Route path="/profile" render={() => <Profile
-                            posts={props.store.getState().profilePage.posts}
-                            dispatch={props.store.dispatch.bind(props.store.dispatch)}
-                            newPostText={props.store.getState().profilePage.newPostText}
-                        />}/>
-                        <Route path="/dialogs" render={() => <DialogsContainer
-                            dialogs={props.store.getState().dialogsPage.dialogs}
-                            messages={props.store.getState().dialogsPage.messages}
-                            newMessageText={props.store.getState().dialogsPage.newMessageText}
-                            dispatch={props.store.dispatch}
-                        />}/>
+                        <Route path="/profile" render={() => <Profile/>}/>
+                        <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                         <Route path="/friends" component={Friends}/>
                         <Route path="/music" component={Music}/>
                     </Switch>
