@@ -16,22 +16,25 @@ export const setUsersAC = (users: Array<UserType>) => ({
     users: users
 }) as const
 
+export type PhotoType = {
+    small: string
+}
+
 export type UserType = {
     id: number
     name: string
     status: string
     followed: boolean
-    userPhoto: string
+    photos: PhotoType
 }
 
 const initialState = [
-    {id: 1, userPhoto: 'https://proza.ru/pics/2010/04/27/810.jpg', name: 'Andrew', status: 'status', followed: true},
-    {id: 2, userPhoto: 'https://proza.ru/pics/2010/04/27/810.jpg', name: 'Anna', status: 'hey', followed: false},
-    {id: 3, userPhoto: 'https://proza.ru/pics/2010/04/27/810.jpg', name: 'Sergey', status: 'hello', followed: true},
+    {id: 1, photos: {small: 'https://proza.ru/pics/2010/04/27/810.jpg'}, name: 'Andrew', status: 'status', followed: true},
+    {id: 2, photos: {small: 'https://proza.ru/pics/2010/04/27/810.jpg'}, name: 'Anna', status: 'hey', followed: false},
+    {id: 3, photos: {small: 'https://proza.ru/pics/2010/04/27/810.jpg'}, name: 'Sergey', status: 'hello', followed: true}
 ];
 
 export const usersReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
-
     switch (action.type) {
         case "FOLLOW":
             return state.map(el => el.id === action.id ? {...el, followed: true} : el)
@@ -40,8 +43,7 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
             return state.map(el => el.id === action.id ? {...el, followed: false} : el)
 
         case "SET-USERS":
-            return [...state, ...action.users]
-
+            return [...action.users]
 
         default: return state
     }
