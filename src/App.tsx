@@ -7,7 +7,7 @@ import Profile from "./components/Profile/Profile";
 import Friends from "./components/Friends/Friends";
 import Music from "./components/Music/Music";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {UsersContainer} from "./components/Users/UsersContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 function App() {
     return (
