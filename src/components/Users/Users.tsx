@@ -1,7 +1,8 @@
 import React from 'react';
 import s from "./Users.module.css";
-import userPhoto from "../../assets/userPhoto.png";
+import userPhoto from "../../assets/img/userPhoto.png";
 import {UserType} from "../../redux/users-reducer";
+import Preloader from "../Preloader/Preloader";
 
 type PropsType = {
     totalUsersCount: number
@@ -11,6 +12,7 @@ type PropsType = {
     onPageChangedHandler: (el: number) => void
     onClickButtonUnFollowHandler: (id: number) => void
     onClickButtonFollowHandler: (id: number) => void
+    isFetching: boolean
 }
 
 const Users = (props: PropsType) => {
@@ -22,6 +24,7 @@ const Users = (props: PropsType) => {
     }
 
     return <div>
+        {props.isFetching && <div><Preloader/></div>}
         <div>
             {
                 pages.map((el, index) => <span key={index} onClick={() => props.onPageChangedHandler(el)} className={props.currentPage === el ? s.selectedPage : ''}>{el}</span>)

@@ -3,12 +3,14 @@ type InitialStateType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
+    isFetching: boolean
 }
 type ActionsTypes = ReturnType<typeof followAC>
     | ReturnType<typeof unFollowAC>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setTotalUsersCountAC>
     | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setIsFetchingAC>
 
 export const followAC = (userId: number) => ({
     type: 'FOLLOW',
@@ -35,6 +37,12 @@ export const setCurrentPageAC = (currentPage: number) => ({
     currentPage: currentPage
 }) as const
 
+export const setIsFetchingAC = (isFetching: boolean) => ({
+    type: 'SET-IS-FETCHING',
+    isFetching: isFetching
+}) as const
+
+
 export type PhotoType = {
     small: string
 }
@@ -51,7 +59,8 @@ const initialState = {
     users: [],
     totalUsersCount: 0,
     pageSize: 50,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 export const usersReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
@@ -71,7 +80,11 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
         case "SET-CURRENT-PAGE":
             return {...state, currentPage: action.currentPage}
 
+        case "SET-IS-FETCHING":
+            return {...state, isFetching: action.isFetching}
 
-        default: return state
+
+        default:
+            return state
     }
 }
