@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/img/userPhoto.png";
 import {UserType} from "../../redux/users-reducer";
 import Preloader from "../Preloader/Preloader";
+import {NavLink} from "react-router-dom";
 
 type PropsType = {
     totalUsersCount: number
@@ -27,15 +28,20 @@ const Users = (props: PropsType) => {
         {props.isFetching && <div><Preloader/></div>}
         <div>
             {
-                pages.map((el, index) => <span key={index} onClick={() => props.onPageChangedHandler(el)} className={props.currentPage === el ? s.selectedPage : ''}>{el}</span>)
+                pages.map((el, index) => <span key={index} onClick={() => props.onPageChangedHandler(el)}
+                                               className={props.currentPage === el ? s.selectedPage : ''}>{el}</span>)
             }
         </div>
         {props.users.map(el => <div key={el.id} className={s.userItem}>
             <div>
-                <div>{<img
-                    src={el.photos.small ? el.photos.small : userPhoto}
-                    className={s.userPhoto}/>}</div>
+                <NavLink to={'/profile'}>
+                    <div>{<img
+                        src={el.photos.small ? el.photos.small : userPhoto}
+                        className={s.userPhoto}/>}
+                    </div>
+                </NavLink>
                 <div>
+
                     {el.followed
                         ? <button onClick={() => props.onClickButtonUnFollowHandler(el.id)}>Unfollow</button>
                         : <button onClick={() => props.onClickButtonFollowHandler(el.id)}>Follow</button>}

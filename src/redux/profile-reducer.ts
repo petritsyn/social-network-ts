@@ -1,4 +1,6 @@
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+import {PhotoType} from "./users-reducer";
+
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> | ReturnType<typeof setUserProfile>
 
 export const addPostAC = () => ({
     type: "ADD-POST",
@@ -9,9 +11,15 @@ export const updateNewPostTextAC = (newText: string) => ({
     newText: newText
 }) as const
 
+export const setUserProfile = (profile: ProfileType) => ({
+    type: "SET-USER-PROFILE",
+    profile: profile
+}) as const
+
 export type InitialStateType = {
     posts: Array<{id: number, message: string, likesCount: number}>
     newPostText: string
+    profile: null | ProfileType
 }
 
 export type PostType = {
@@ -20,12 +28,32 @@ export type PostType = {
     likesCount: number
 }
 
+export type ProfileType = {
+    aboutMe: string | null
+    contacts: {
+        facebook: string | null
+        website: string | null
+        vk: string | null
+        twitter: string | null
+        instagram: string | null
+        youtube: string | null
+        github: string | null
+        mainLink: string | null
+    },
+    lookingForAJob: boolean
+    lookingForAJobDescription: string | null
+    fullName: string | null
+    userId: number
+    photos: PhotoType
+}
+
 let initialState: InitialStateType = {
     posts: [
         {id: 1, message: 'First post', likesCount: 5},
         {id: 2, message: 'Second post', likesCount: 7}
     ],
-    newPostText: ''
+    newPostText: '',
+    profile: null as null | ProfileType
 }
 
 const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
@@ -43,6 +71,12 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
             return {
                 ...state,
                 newPostText: action.newText
+            }
+
+        case "SET-USER-PROFILE":
+            return {
+                ...state,
+                profile: action.profile
             }
 
         default:

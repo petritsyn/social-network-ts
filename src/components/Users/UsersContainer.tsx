@@ -30,38 +30,6 @@ const mapStateToProps = (state: AppStateType): mapStatePropsType => {
     }
 }
 
-// type mapDispatchPropsType = {
-//     follow: (userId: number) => void
-//     unFollow: (userId: number) => void
-//     setUsers: (users: Array<UserType>) => void
-//     setTotalUsersCount: (totalCount: number) => void
-//     setCurrentPage: (currentPage: number) => void
-//     setIsFetching: (isFenching: boolean) => void
-// }
-
-// const mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
-//     return {
-//         follow: (userId: number) => {
-//             dispatch(followAC(userId))
-//         },
-//         unFollow: (userId: number) => {
-//             dispatch(unFollowAC(userId))
-//         },
-//         setUsers: (users: Array<UserType>) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setTotalUsersCount: (totalCount: number) => {
-//             dispatch(setTotalUsersCountAC(totalCount))
-//         },
-//         setCurrentPage: (currentPage: number) => {
-//             dispatch(setCurrentPageAC(currentPage))
-//         },
-//         setIsFetching: (isFenching: boolean) => {
-//             dispatch(setIsFetchingAC(isFenching))
-//         }
-//     }
-// }
-
 type PropsType = {
     users: Array<UserType>
     totalUsersCount: number

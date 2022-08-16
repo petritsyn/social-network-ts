@@ -44,7 +44,8 @@ export const setIsFetching = (isFetching: boolean) => ({
 
 
 export type PhotoType = {
-    small: string
+    small: string | undefined
+    large: string | undefined
 }
 
 export type UserType = {
