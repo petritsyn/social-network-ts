@@ -9,3 +9,12 @@
     height: 60px;
     border-radius: 50%;
 }
+
+.loginBlock {
+    float: right;
+}
+
+.loginBlock a {
+    color: white;
+    text-decoration: none;
+}
