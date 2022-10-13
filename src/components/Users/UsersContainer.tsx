@@ -48,20 +48,35 @@ type ResponseType<T> = {
     items: T
     totalCount: number
 }
+type ResponseFollowType = {
+    resultCode: number
+}
 
 export class UsersContainer extends React.Component<PropsType> {
 
     onClickButtonFollowHandler = (userId: number) => {
-        this.props.follow(userId)
+
+        axios.post<ResponseFollowType>(`https://social-network.samuraijs.com/api/1.0/follow/` + userId, {}, {withCredentials: true, headers: {'API-KEY': '7d54e03a-c727-4a11-92e7-335f41a4e836'}})
+            .then((response) => {
+                if (response.data.resultCode === 0) {
+                    this.props.follow(userId)
+                }
+            })
     }
 
     onClickButtonUnFollowHandler = (userId: number) => {
-        this.props.unFollow(userId)
+
+        axios.delete<ResponseFollowType>(`https://social-network.samuraijs.com/api/1.0/follow/` + userId, {withCredentials: true, headers: {'API-KEY': '7d54e03a-c727-4a11-92e7-335f41a4e836'}})
+            .then((response) => {
+                if (response.data.resultCode === 0) {
+                    this.props.unFollow(userId)
+                }
+            })
     }
 
     componentDidMount() {
         this.props.setIsFetching(true)
-        axios.get<ResponseType<UserType[]>>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get<ResponseType<UserType[]>>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{withCredentials: true, headers: {'API-KEY': '7d54e03a-c727-4a11-92e7-335f41a4e836'}})
             .then((response) => {
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUsersCount(response.data.totalCount)

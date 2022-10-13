@@ -26,7 +26,7 @@ const Users = (props: PropsType) => {
 
     return <div>
         {props.isFetching && <div><Preloader/></div>}
-        <div>
+        <div className={s.pageNumbers}>
             {
                 pages.map((el, index) => <span key={index} onClick={() => props.onPageChangedHandler(el)}
                                                className={props.currentPage === el ? s.selectedPage : ''}>{el}</span>)
@@ -43,7 +43,10 @@ const Users = (props: PropsType) => {
                 <div>
 
                     {el.followed
-                        ? <button onClick={() => props.onClickButtonUnFollowHandler(el.id)}>Unfollow</button>
+                        ? <button onClick={ () => {
+                                props.onClickButtonUnFollowHandler(el.id)
+                            }
+                        }>Unfollow</button>
                         : <button onClick={() => props.onClickButtonFollowHandler(el.id)}>Follow</button>}
                 </div>
             </div>
