@@ -11,6 +11,7 @@ import {
 import React from "react";
 import {default as axios} from "axios";
 import Users from "./Users";
+import {usersAPI} from "../../api/api";
 
 type mapStatePropsType = {
     users: Array<UserType>
@@ -56,7 +57,10 @@ export class UsersContainer extends React.Component<PropsType> {
 
     onClickButtonFollowHandler = (userId: number) => {
 
-        axios.post<ResponseFollowType>(`https://social-network.samuraijs.com/api/1.0/follow/` + userId, {}, {withCredentials: true, headers: {'API-KEY': '7d54e03a-c727-4a11-92e7-335f41a4e836'}})
+        axios.post<ResponseFollowType>(`https://social-network.samuraijs.com/api/1.0/follow/` + userId, {}, {
+            withCredentials: true,
+            headers: {'API-KEY': '7d54e03a-c727-4a11-92e7-335f41a4e836'}
+        })
             .then((response) => {
                 if (response.data.resultCode === 0) {
                     this.props.follow(userId)
@@ -66,7 +70,10 @@ export class UsersContainer extends React.Component<PropsType> {
 
     onClickButtonUnFollowHandler = (userId: number) => {
 
-        axios.delete<ResponseFollowType>(`https://social-network.samuraijs.com/api/1.0/follow/` + userId, {withCredentials: true, headers: {'API-KEY': '7d54e03a-c727-4a11-92e7-335f41a4e836'}})
+        axios.delete<ResponseFollowType>(`https://social-network.samuraijs.com/api/1.0/follow/` + userId, {
+            withCredentials: true,
+            headers: {'API-KEY': '7d54e03a-c727-4a11-92e7-335f41a4e836'}
+        })
             .then((response) => {
                 if (response.data.resultCode === 0) {
                     this.props.unFollow(userId)
@@ -76,10 +83,10 @@ export class UsersContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.setIsFetching(true)
-        axios.get<ResponseType<UserType[]>>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{withCredentials: true, headers: {'API-KEY': '7d54e03a-c727-4a11-92e7-335f41a4e836'}})
-            .then((response) => {
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then((data: ResponseType<UserType[]>) => {
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
                 this.props.setIsFetching(false)
             })
     }
@@ -87,10 +94,10 @@ export class UsersContainer extends React.Component<PropsType> {
     onPageChangedHandler = (el: number) => {
         this.props.setIsFetching(true)
         this.props.setCurrentPage(el)
-        axios.get<ResponseType<UserType[]>>(`https://social-network.samuraijs.com/api/1.0/users?page=${el}&count=${this.props.pageSize}`)
-            .then((response) => {
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+        usersAPI.getUsers(el, this.props.pageSize)
+            .then((data: ResponseType<UserType[]>) => {
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
                 this.props.setIsFetching(false)
             })
     }
@@ -114,4 +121,11 @@ export class UsersContainer extends React.Component<PropsType> {
     }
 }
 
-export default connect(mapStateToProps, {follow, unFollow, setUsers, setTotalUsersCount, setCurrentPage, setIsFetching})(UsersContainer);
+export default connect(mapStateToProps, {
+    follow,
+    unFollow,
+    setUsers,
+    setTotalUsersCount,
+    setCurrentPage,
+    setIsFetching
+})(UsersContainer);
