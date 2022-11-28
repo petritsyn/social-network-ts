@@ -14,6 +14,7 @@ type mapStatePropsType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageText: string
+    isAuth: boolean
 }
 
 type mapDispatchPropsType = {
@@ -25,7 +26,8 @@ const mapStateToProps = (state: AppStateType): mapStatePropsType => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessageText: state.dialogsPage.newMessageText
+        newMessageText: state.dialogsPage.newMessageText,
+        isAuth: state.auth.isAuth
     }
 }
 

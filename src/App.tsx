@@ -18,9 +18,9 @@ function App() {
                 <Navbar/>
                 <div className="contentWrapper">
                     <Switch>
-                        <Route path="/profile/:userId?" render={() => <ProfileContainer />}/>
-                        <Route path="/dialogs" render={() => <DialogsContainer/>}/>
-                        <Route path="/users" render={() => <UsersContainer/>}/>
+                        <Route path="/profile/:userId?" component={ProfileContainer}/>
+                        <Route path="/dialogs" component={DialogsContainer}/>
+                        <Route path="/users" component={UsersContainer}/>
                         <Route path="/friends" component={Friends}/>
                         <Route path="/music" component={Music}/>
                         <Route path="/login" component={Login}/>
