@@ -1,5 +1,5 @@
-import {usersAPI} from "../api/api";
-import {ResponseType} from "../components/Users/UsersContainer";
+import {API} from "../api/api";
+import {Dispatch} from "redux";
 
 type InitialStateType = {
     users: Array<UserType>
@@ -9,6 +9,12 @@ type InitialStateType = {
     isFetching: boolean
     followingInProgress: Array<number>
 }
+
+export type ResponseType<T> = {
+    items: T
+    totalCount: number
+}
+
 type ActionsTypes = ReturnType<typeof followSuccess>
     | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setUsers>
@@ -111,10 +117,10 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
 }
 
 export const getUsers = (currentPage: number, pageSize: number) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch) => {
         dispatch(setIsFetching(true));
         dispatch(setCurrentPage(currentPage));
-        usersAPI.getUsers(currentPage, pageSize)
+        API.getUsers(currentPage, pageSize)
             .then((data: ResponseType<UserType[]>) => {
                 dispatch(setUsers(data.items));
                 dispatch(setTotalUsersCount(data.totalCount));
@@ -124,9 +130,9 @@ export const getUsers = (currentPage: number, pageSize: number) => {
 }
 
 export const follow = (userId: number) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch) => {
         dispatch(toggleIsFollowingProgress(true, userId));
-        usersAPI.follow(userId)
+        API.follow(userId)
             .then((response) => {
                 if (response.data.resultCode === 0) {
                     dispatch(followSuccess(userId));
@@ -137,9 +143,9 @@ export const follow = (userId: number) => {
 }
 
 export const unfollow = (userId: number) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch) => {
         dispatch(toggleIsFollowingProgress(true, userId));
-        usersAPI.unFollow(userId)
+        API.unFollow(userId)
             .then((response) => {
                 if (response.data.resultCode === 0) {
                     dispatch(unfollowSuccess(userId));

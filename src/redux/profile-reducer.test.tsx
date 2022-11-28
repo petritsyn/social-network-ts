@@ -1,4 +1,4 @@
-import profileReducer, {addPostAC, InitialStateType, updateNewPostTextAC} from "./profile-reducer";
+import {profileReducer, addPostAC, InitialStateType, updateNewPostTextAC} from "./profile-reducer";
 
 // test.skip('new post should be added', () => {
 //     const startState: InitialStateType = {

@@ -1,4 +1,7 @@
-import {PhotoType} from "./users-reducer";
+import {PhotoType, toggleIsFollowingProgress, unfollowSuccess} from "./users-reducer";
+import {Dispatch} from "redux";
+import {API} from "../api/api";
+import {setAuthUserDataAC} from "./auth-reducer";
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> | ReturnType<typeof setUserProfile>
 
@@ -56,7 +59,7 @@ let initialState: InitialStateType = {
     profile: null as null | ProfileType
 }
 
-const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+export const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
 
     switch (action.type) {
         case "ADD-POST":
@@ -84,4 +87,11 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
     }
 }
 
-export default profileReducer;
+export const getProfile = (userId: number) => {
+    return (dispatch: Dispatch) => {
+        API.profile(userId)
+            .then((response) => {
+                dispatch(setUserProfile(response.data));
+            })
+    }
+}

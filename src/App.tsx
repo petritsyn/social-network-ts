@@ -8,6 +8,7 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import {Login} from "./components/Login/Login";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                         <Route path="/users" render={() => <UsersContainer/>}/>
                         <Route path="/friends" component={Friends}/>
                         <Route path="/music" component={Music}/>
+                        <Route path="/login" component={Login}/>
                     </Switch>
                 </div>
             </div>
