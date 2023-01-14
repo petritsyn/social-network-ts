@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Friends from "./components/Friends/Friends";
 import Music from "./components/Music/Music";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import UsersContainer from "./components/Users/UsersContainer";
