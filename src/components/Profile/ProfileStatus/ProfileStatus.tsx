@@ -1,26 +1,42 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './ProfileStatus.module.css';
 
-class ProfileStatus extends React.Component {
+type PropsType = {
+    status: string
+    updateStatus: (status: string) => void
+}
+
+class ProfileStatus extends React.Component<PropsType> {
 
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
-    activateEditMode() {
+    activateEditMode = () => {
         this.setState({editMode: true})
     }
 
-    deActivateEditMode() {
+    deActivateEditMode = () => {
         this.setState({editMode: false})
+    }
+
+    onInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({status: e.currentTarget.value})
+    }
+
+    onBlurHandler = () => {
+        this.props.updateStatus(this.state.status)
     }
 
     render() {
         return (
             <div className={s.profileStatus}>
-                {this.state.editMode &&
-                    <div onBlur={this.deActivateEditMode.bind(this)}><input autoFocus type="text"/></div>}
-                {!this.state.editMode && <div onDoubleClick={this.activateEditMode.bind(this)}><span>text</span></div>}
+                <div>
+                    {this.state.editMode &&
+                        <div onBlur={this.deActivateEditMode}><input autoFocus onChange={this.onInputChangeHandler} onBlur={this.onBlurHandler} value={this.state.status} type="text"/></div>}
+                    {!this.state.editMode && <div onDoubleClick={this.activateEditMode}><span>{this.props.status || 'no status'}</span></div>}
+                </div>
             </div>
         );
     }

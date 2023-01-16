@@ -7,13 +7,15 @@ import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 type PropsType = {
     profile: ProfileType | null
+    status: string
+    updateStatus: (status: string) => void
 }
 
 const Profile = (props: PropsType) => {
     return (
         <div className={s.profile}>
             <Content profile={props.profile}/>
-            <ProfileStatus/>
+            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             <MyPostsContainer/>
         </div>
     );

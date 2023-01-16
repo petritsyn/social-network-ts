@@ -6,7 +6,7 @@ const instance = axios.create({
     headers: {'API-KEY': '7d54e03a-c727-4a11-92e7-335f41a4e836'}
 });
 
-export const API = {
+export const usersAPI = {
     getUsers(currentPage: number = 1, pageSize: number = 50) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
     },
@@ -18,8 +18,17 @@ export const API = {
     },
     me() {
         return instance.get(`auth/me`)
-    },
+    }
+}
+
+export const profileAPI = {
     profile(userId: number) {
         return instance.get(`profile/` + userId)
+    },
+    getStatus(userId: number) {
+        return instance.get(`profile/status/` + userId)
+    },
+    updateStatus(status: string) {
+        return instance.put(`profile/status`, {status})
     }
 }
