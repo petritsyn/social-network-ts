@@ -1,5 +1,5 @@
 import React from 'react';
-import {addPostAC, updateNewPostTextAC} from '../../../redux/profile-reducer';
+import {addPostAC} from '../../../redux/profile-reducer';
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
@@ -13,28 +13,22 @@ export type PostType = {
 
 type mapStatePropsType = {
     posts: Array<PostType>
-    newPostText: string
 }
 
 type mapDispatchPropsType = {
-    addPost: () => void
-    onPostChange: (newPostText: string) => void
+    addPost: (postText: string) => void
 }
 
 const mapStateToProps = (state: AppStateType): mapStatePropsType => {
     return {
-        posts: state.profilePage.posts,
-        newPostText: state.profilePage.newPostText
+        posts: state.profilePage.posts
     }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
     return {
-        addPost: () => {
-            dispatch(addPostAC())
-        },
-        onPostChange: (newPostText: string) => {
-            dispatch(updateNewPostTextAC(newPostText))
+        addPost: (postText: string) => {
+            dispatch(addPostAC(postText))
         }
     }
 }
