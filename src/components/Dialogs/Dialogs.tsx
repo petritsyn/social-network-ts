@@ -4,6 +4,8 @@ import DialogsItem from './DialogsItem/DialogsItem';
 import Message from './Message/Message';
 import {DialogType, MessageType} from "../../redux/dialogs-reducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Textarea} from "../common/FormsControls/FormsControls";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
 
 type DialogsPropsType = {
     dialogs: Array<DialogType>
@@ -38,13 +40,16 @@ const Dialogs = (props: DialogsPropsType) => {
     );
 };
 
-const SendMessageForm = (props: InjectedFormProps<FormDataType>) => {
+const maxLength50 = maxLengthCreator(50);
+
+const AddMessageForm = (props: InjectedFormProps<FormDataType>) => {
     return <form onSubmit={props.handleSubmit}>
-        <div><Field name={'textarea'} component={'textarea'} placeholder={'Enter the text'} /></div>
+        <div><Field name={'textarea'} component={Textarea} placeholder={'Enter the text'}
+        validate={[required, maxLength50]}/></div>
         <div><button>Send</button></div>
     </form>
 }
 
-const SendMessageReduxForm = reduxForm<FormDataType>({form: 'message'})(SendMessageForm);
+const SendMessageReduxForm = reduxForm<FormDataType>({form: 'message'})(AddMessageForm);
 
 export default Dialogs;
