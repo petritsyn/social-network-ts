@@ -15,9 +15,6 @@ export const usersAPI = {
     },
     unFollow(userId: number) {
         return instance.delete(`follow/` + userId)
-    },
-    me() {
-        return instance.get(`auth/me`)
     }
 }
 
@@ -30,5 +27,17 @@ export const profileAPI = {
     },
     updateStatus(status: string) {
         return instance.put(`profile/status`, {status})
+    }
+}
+
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`)
+    },
+    login(email: string, password: string, rememberMe: boolean = false) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
+    },
+    logout() {
+        return instance.delete(`auth/login`)
     }
 }
