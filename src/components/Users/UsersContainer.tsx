@@ -7,7 +7,7 @@ import {
     getCurrentPageSelector, getFollowingInProgressSelector, getIsFetchingSelector,
     getPageSizeSelector,
     getTotalUsersCountSelector,
-    getUsersSelector
+    getUsersSuperSelector
 } from "../../redux/users-selectors";
 // import { getUsers } from "../../redux/users-selectors";
 
@@ -28,20 +28,9 @@ type MapDispatchPropsType = {
 
 type PropsType = mapStatePropsType & MapDispatchPropsType
 
-// const mapStateToProps = (state: AppStateType): mapStatePropsType => {
-//     return {
-//         users: state.usersPage.users,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         pageSize: state.usersPage.pageSize,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followingInProgress: state.usersPage.followingInProgress
-//     }
-// }
-
 const mapStateToProps = (state: AppStateType): mapStatePropsType => {
     return {
-        users: getUsersSelector(state),
+        users: getUsersSuperSelector(state),
         totalUsersCount: getTotalUsersCountSelector(state),
         pageSize: getPageSizeSelector(state),
         currentPage: getCurrentPageSelector(state),
