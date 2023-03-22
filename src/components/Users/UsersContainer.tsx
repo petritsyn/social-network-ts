@@ -1,8 +1,15 @@
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {follow, unfollow, getUsers, UserType} from "../../redux/users-reducer";
+import {follow, requestUsers, unfollow, UserType} from "../../redux/users-reducer";
 import React from "react";
 import Users from "./Users";
+import {
+    getCurrentPageSelector, getFollowingInProgressSelector, getIsFetchingSelector,
+    getPageSizeSelector,
+    getTotalUsersCountSelector,
+    getUsersSelector
+} from "../../redux/users-selectors";
+// import { getUsers } from "../../redux/users-selectors";
 
 type mapStatePropsType = {
     users: Array<UserType>
@@ -21,14 +28,25 @@ type MapDispatchPropsType = {
 
 type PropsType = mapStatePropsType & MapDispatchPropsType
 
+// const mapStateToProps = (state: AppStateType): mapStatePropsType => {
+//     return {
+//         users: state.usersPage.users,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         pageSize: state.usersPage.pageSize,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress: state.usersPage.followingInProgress
+//     }
+// }
+
 const mapStateToProps = (state: AppStateType): mapStatePropsType => {
     return {
-        users: state.usersPage.users,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        pageSize: state.usersPage.pageSize,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsersSelector(state),
+        totalUsersCount: getTotalUsersCountSelector(state),
+        pageSize: getPageSizeSelector(state),
+        currentPage: getCurrentPageSelector(state),
+        isFetching: getIsFetchingSelector(state),
+        followingInProgress: getFollowingInProgressSelector(state)
     }
 }
 
@@ -73,5 +91,5 @@ class UsersContainer extends React.Component<PropsType> {
 export default connect(mapStateToProps, {
     follow,
     unfollow,
-    getUsers
+    getUsers: requestUsers
 })(UsersContainer);
