@@ -9,6 +9,7 @@ import {Textarea} from "../../common/FormsControls/FormsControls";
 type MyPostsPropsType = {
     posts: Array<PostType>
     addPost: (postText: string) => void
+    deletePost: (id: number) => void
 }
 
 type FormDataType = {
@@ -19,7 +20,7 @@ const maxLength10 = maxLengthCreator(10);
 
 const MyPosts = (props: MyPostsPropsType) => {
 
-    const postElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} key={p.id}/>)
+    const postElements = props.posts.map(p => <Post post={{message: p.message, id: p.id, likesCount: p.likesCount}} key={p.id} cb={()=> props.deletePost(p.id ?? 0)}/>)
 
     const onSubmit = (formData: FormDataType) => {
         props.addPost(formData.post);

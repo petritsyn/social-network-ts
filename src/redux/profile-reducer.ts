@@ -5,6 +5,7 @@ import {profileAPI} from "../api/api";
 export type ActionsTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatusAC>
+    | ReturnType<typeof deletePostAC>
 
 export const addPostAC = (postText: string) => ({
     type: "ADD-POST",
@@ -19,6 +20,11 @@ export const setUserProfile = (profile: ProfileType) => ({
 export const setStatusAC = (status: string) => ({
     type: "SET-STATUS",
     status
+}) as const
+
+export const deletePostAC = (id: number) => ({
+    type: "DELETE-POST",
+    id
 }) as const
 
 export type InitialStateType = {
@@ -81,6 +87,12 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
             return {
                 ...state,
                 status: action.status
+            }
+
+        case "DELETE-POST":
+            return {
+                ...state,
+                posts: state.posts.filter(el => el.id !== action.id)
             }
 
         default:
