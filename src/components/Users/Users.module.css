@@ -1,23 +1,3 @@
-.userPhoto {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-}
-
-.userItem {
-    display: flex;
-}
-
-.selectedPage {
-    font-weight: bold;
-}
-
-.pageNumbers {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-}
-
 .pageNumbers span {
     margin-right: 5px;
 }

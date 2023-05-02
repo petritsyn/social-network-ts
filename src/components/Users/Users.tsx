@@ -1,9 +1,9 @@
 import React from 'react';
-import s from "./Users.module.css";
-import userPhoto from "../../assets/img/userPhoto.png";
-import {UserType} from "../../redux/users-reducer";
+import {UserType} from "redux/users-reducer";
 import Preloader from "../Preloader/Preloader";
-import {NavLink} from "react-router-dom";
+import {Paginator} from "../common/Paginator/Paginator"
+import {User} from "components/Users/User/User";
+
 
 type PropsType = {
     totalUsersCount: number
@@ -27,35 +27,16 @@ const Users = (props: PropsType) => {
 
     return <div>
         {props.isFetching && <div><Preloader/></div>}
-        <div className={s.pageNumbers}>
-            {
-                pages.map((el, index) => <span key={index} onClick={() => props.onPageChangedHandler(el)}
-                                               className={props.currentPage === el ? s.selectedPage : ''}>{el}</span>)
-            }
-        </div>
-        {props.users.map(el => <div key={el.id} className={s.userItem}>
-            <div>
-                <NavLink to={'/profile/' + el.id}>
-                    <div>{<img
-                        src={el.photos.small ? el.photos.small : userPhoto}
-                        className={s.userPhoto}/>}
-                    </div>
-                </NavLink>
-                <div>
 
-                    {el.followed
-                        ? <button disabled={props.followingInProgress.some(id => id === el.id)} onClick={ () => {
-                                props.onClickButtonUnFollowHandler(el.id)
-                            }
-                        }>Unfollow</button>
-                        : <button disabled={props.followingInProgress.some(id => id === el.id)} onClick={() => props.onClickButtonFollowHandler(el.id)}>Follow</button>}
-                </div>
-            </div>
-            <div>
-                <div>{el.name}</div>
-                <div>{el.status}</div>
-            </div>
-        </div>)}
+        <Paginator currentPage={props.currentPage} pages={pages} onPageChangedHandler={props.onPageChangedHandler}/>
+
+        <div>
+            {props.users.map(el => <User user={el} key={el.id} users={props.users}
+                                         followingInProgress={props.followingInProgress}
+                                         onClickButtonUnFollowHandler={props.onClickButtonUnFollowHandler}
+                                         onClickButtonFollowHandler={props.onClickButtonFollowHandler}/>)}
+        </div>
+
     </div>
 };
 

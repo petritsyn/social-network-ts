@@ -1,0 +1,9 @@
+.selectedPage {
+    font-weight: bold;
+}
+
+.pageNumbers {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}

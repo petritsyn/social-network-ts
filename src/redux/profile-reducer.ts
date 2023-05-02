@@ -1,6 +1,6 @@
 import {PhotoType} from "./users-reducer";
 import {Dispatch} from "redux";
-import {profileAPI} from "../api/api";
+import {profileAPI} from "api/api";
 
 export type ActionsTypes = ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfile>
@@ -101,30 +101,24 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
 }
 
 export const getProfile = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.profile(userId)
-            .then((response) => {
+    return async (dispatch: Dispatch) => {
+        const response = await profileAPI.profile(userId)
                 dispatch(setUserProfile(response.data));
-            })
     }
 }
 
 export const getStatus = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.getStatus(userId)
-            .then((response) => {
+    return async (dispatch: Dispatch) => {
+        const response = await profileAPI.getStatus(userId)
                 dispatch(setStatusAC(response.data));
-            })
     }
 }
 
 export const updateStatus = (status: string) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.updateStatus(status)
-            .then((response) => {
+    return async (dispatch: Dispatch) => {
+        const response = await profileAPI.updateStatus(status)
                 if (response.data.resultCode === 0) {
                     dispatch(setStatusAC(status));
                 }
-            })
     }
 }
